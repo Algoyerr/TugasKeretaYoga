@@ -1,0 +1,3 @@
+interface CetakTiket {
+    void cetakInfo();
+}
