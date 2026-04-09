@@ -1,9 +1,7 @@
-class TiketBisnis extends Tiket implements CetakTiket {
+class TiketBisnis extends Tiket {
 
-    public TiketBisnis(String kodeTiket, String namaPenumpang, String tujuan, int harga,
-                       String tanggal, String jam, String noTelepon, String nik) {
-
-        super(kodeTiket, namaPenumpang, tujuan, harga, tanggal, jam, noTelepon, nik);
+    public TiketBisnis(String kode, String nama, String tujuan, int harga) {
+        super(kode, nama, tujuan, harga);
     }
 
     @Override
@@ -13,17 +11,10 @@ class TiketBisnis extends Tiket implements CetakTiket {
 
     @Override
     public void cetakInfo() {
-        System.out.println("=== TIKET BISNIS ===");
-        System.out.println("Kode Tiket : " + kodeTiket);
-        System.out.println("Nama       : " + namaPenumpang);
-        System.out.println("Tujuan     : " + tujuan);
-        System.out.println("Tanggal    : " + tanggal);
-        System.out.println("Jam        : " + jam);
-
-        // tetap lewat getter
-        System.out.println("No HP      : " + getNoTelepon());
-        System.out.println("NIK        : " + getNik());
-
-        System.out.println("Harga      : " + hitungHarga());
+        System.out.println("=== Tiket Bisnis ===");
+        System.out.println("Kode   : " + kode);
+        System.out.println("Nama   : " + nama);
+        System.out.println("Tujuan : " + tujuan);
+        System.out.println("Harga  : " + hitungHarga());
     }
 }

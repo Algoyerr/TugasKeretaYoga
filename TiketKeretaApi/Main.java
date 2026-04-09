@@ -1,33 +1,59 @@
+import java.util.*;
+import java.util.stream.*;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        TiketEkonomi ekonomi = new TiketEkonomi(
-                "2221",
-                "Yoga",
-                "Bandung",
-                100000,
-                "26 April",
-                "17.00 WIB",
-                "089543526154",
-                "321100403982"
+        Scanner input = new Scanner(System.in);
+
+        // DATA TIKET (LIST)
+        List<Tiket> daftarTiket = new ArrayList<>();
+
+        daftarTiket.add(new TiketEkonomi("E01", "-", "Bandung", 100000));
+        daftarTiket.add(new TiketBisnis("B01", "-", "Jakarta", 150000));
+        daftarTiket.add(new TiketEkonomi("E02", "-", "Surabaya", 120000));
+        daftarTiket.add(new TiketBisnis("B02", "-", "Bandung", 180000));
+
+        // TAMPILKAN DAFTAR TIKET
+        System.out.println("=== DAFTAR TIKET ===");
+        daftarTiket.forEach(t ->
+            System.out.println(t.kode + " | " + t.tujuan + " | Rp." + t.hitungHarga())
         );
 
-        TiketBisnis bisnis = new TiketBisnis(
-                "2421",
-                "Putri",
-                "Jakarta",
-                150000,
-                "26 April",
-                "17.00 WIB",
-                "0895435221",
-                "32110040000"
-        );
+        // INPUT USER
+        System.out.print("\nMasukkan kode tiket: ");
+        String kodeInput = input.nextLine();
 
-        ekonomi.cetakInfo();
+        System.out.print("Masukkan nama pemesan: ");
+        String namaInput = input.nextLine();
 
-        System.out.println("----------------------");
+        System.out.print("Jumlah tiket: ");
+        int jumlah = input.nextInt();
 
-        bisnis.cetakInfo();
+        // STREAM → CARI TIKET
+        Optional<Tiket> tiketDipilih = daftarTiket.stream()
+                .filter(t -> t.kode.equalsIgnoreCase(kodeInput))
+                .findFirst();
+
+        if (tiketDipilih.isPresent()) {
+
+            Tiket t = tiketDipilih.get();
+
+            // SET NAMA PEMESAN
+            t.nama = namaInput;
+
+            // HITUNG TOTAL
+            int total = t.hitungHarga() * jumlah;
+
+            // OUTPUT STRUK
+            System.out.println("\n=== STRUK PEMESANAN ===");
+            t.cetakInfo();
+            System.out.println("Jumlah : " + jumlah);
+            System.out.println("Total  : Rp." + total);
+
+        } else {
+            System.out.println("Tiket tidak ditemukan!");
+        }
     }
 }
