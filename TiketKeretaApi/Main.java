@@ -40,6 +40,7 @@ public class Main {
             if (jumlah <= 0) {
                 throw new Exception("Jumlah tiket harus lebih dari 0!");
             }
+
             Optional<Tiket> tiketDipilih = daftarTiket.stream()
                     .filter(t -> t.kode.equalsIgnoreCase(kodeInput))
                     .findFirst();
@@ -64,10 +65,7 @@ public class Main {
             System.out.println("ERROR: Input jumlah harus angka!");
 
         } catch (Exception e) {
-            System.out.println("EeRROR: " + e.getMessage());
-
-        } finally {
-            System.out.println("\nProgram selesai (tidak crash 👍)");
+            System.out.println("ERROR: " + e.getMessage());
         }
     }
 }
